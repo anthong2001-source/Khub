@@ -1,0 +1,32 @@
+-- [[ K HUB v26.3 - Full Internal + Server Hop + Anti-AFK ]]
+local Players = game:GetService("Players")
+local Workspace = game:GetService("Workspace")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local VirtualUser = game:GetService("VirtualUser")
+local TeleportService = game:GetService("TeleportService")
+local HttpService = game:GetService("HttpService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+if playerGui:FindFirstChild("KHub_FullInternal") then
+	playerGui["KHub_FullInternal"]:Destroy()
+end
+
+-- Remotes
+local remotes = ReplicatedStorage:FindFirstChild("Remotes")
+local setTarget = remotes and remotes:FindFirstChild("SetTarget")
+local attackAnim = remotes and remotes:FindFirstChild("AttackAnim")
+local useSkill = remotes and remotes:FindFirstChild("UseSkill")
+local questAction = remotes and remotes:FindFirstChild("QuestAction")
+local dailyClaim = remotes and remotes:FindFirstChild("DailyClaim")
+local bagSell = remotes and remotes:FindFirstChild("BagSell")
+
+-- Variables State
+local autoFarm = false
+local autoCombo = false
+local autoQuest = false
+local autoLoot = false
+
+-- 🛡️ ระบบ Anti-AFK ทำงานอัตโนมัติตลอดเวลา (ส่งสัญญาณทุก 60 วินาที)
+player.Idled
